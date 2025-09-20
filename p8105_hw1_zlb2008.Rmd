@@ -7,7 +7,7 @@ output: html_document
 
 Load libararies
 
-```{r}
+```{r, echo = FALSE}
 library(tidyverse)
 library(moderndive)
 ```
@@ -15,22 +15,50 @@ library(moderndive)
 # Problem 1
 
 ```{r import step and basic anal}
-data("early_january_weather") 
+data("early_january_weather") #load dataset
 
 weather_df <- early_january_weather |>
   janitor::clean_names() #clean names in new df, preserve original
   
-summary(weather_df) 
+summary(weather_df) #view summary
 print(nrow(weather_df)) #358 rows
 print(ncol(weather_df)) #15 col
 
 print(mean(pull(weather_df, temp))) #39.58212
-  
 ```
 
-# Problem 2
+The dataset "early_january_weather" (renamed weather_df) contains 15 variables (reflecting 15 columns) and 358 observations (reflecting 358 rows):
+* `origin`: airport code (EWR)
+* `year`: 2013
+* `month`: january
+* `day`: january 1-15th
+* `hour`: 12:00 am - 23:00 pm
+* `temp`: mean = 39.58212 (ªF)
+* `dewp`: mean = 28.06 (ªF)
+* `humid`: mean = 65.48 (%)
+* `wind_dir`: mean = 208.2 (degrees from north)
+* `wind_speed`: mean = 8.226 (mph)
+* `wind_gust`: mean = 22.53 (mph)
+* `precip`: mean = 0.002039 (inches)
+* `pressure`: mean = 1023 (millibars)
+* `visib`: mean = 8.515 (miles)
+* `time_hour`: range jan 1st at 01:00:00 am to jan 15th at 23:00:00 pm
+
+As requested, the mean temperature was 39.58212 (ªF).
 
 ```{r}
+# scatterplot of `temp` vs. `time` w `humid` as color
+ggplot(weather_df, aes(x = time_hour, y = temp, color = humid)) +
+  geom_point() +
+  labs( #labels
+    title = "Temperature (ªF) vs Time (Hour)",
+    x = "Hour",
+    y = "Temperature (°F)",
+    color = "Humidity (%)"
+  ) 
 
+#export plot
+ggsave('temp_hour_scatter.jpeg')
 ```
 
+The scatterplot of `temp` (ªF) vs. `time_hour` (hours) shows that the temperature rises during the days, peaking in the afternoon and lowering by the evening. The minimum temperatures throughout the days steadily increased throughout the month of January. The relative humidity tends was low during this time period, but increased significantly around Jan 14 when temperatures rose. 
