@@ -62,3 +62,30 @@ ggsave('temp_hour_scatter.jpeg')
 ```
 
 The scatterplot of `temp` (ªF) vs. `time_hour` (hours) shows that the temperature rises during the days, peaking in the afternoon and lowering by the evening. The minimum temperatures throughout the days steadily increased throughout the month of January. The relative humidity tends was low during this time period, but increased significantly around Jan 14 when temperatures rose. 
+
+## Problem 2
+
+```{r}
+#create a tibble
+q2_df <- tibble(
+  num_vec = rnorm(10), #random normal sample 
+  above_0 = num_vec > 0, #check if num_vec is above 0
+  char_vec = letters[1:10], #character vector
+  fact_vec = factor(rep(c("1", "2", "3"), length = 10)) #factor vector
+  )
+
+#take all means
+print(mean(pull(q2_df, num_vec)))
+print(mean(pull(q2_df, above_0)))
+print(mean(pull(q2_df, char_vec)))
+print(mean(pull(q2_df, fact_vec)))
+```
+Taking the means of the numerical vector `num_vec` and the logical vector `above_0` worked, but I was unable to take the mean of the character vector `char_vec` and the factor vector `fact_vec`.
+
+```{r convert to numeric, echo = false}
+#convert to numeric values
+as.numeric(pull(q2_df, above_0)) 
+as.numeric(pull(q2_df, char_vec)) 
+as.numeric(pull(q2_df, fact_vec))
+```
+The logical vector `above_0` was converted to a binary numeric, and the the factor vector `fact_vec` took on the values the its factor levels, but but I was unable to coerce the character vector `char_vec` into a numerical vector because they were all converted to NAs. This helps explain why the previous means() code failed.
