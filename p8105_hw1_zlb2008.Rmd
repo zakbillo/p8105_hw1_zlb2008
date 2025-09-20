@@ -5,9 +5,9 @@ date: "09/20/2025"
 output: html_document
 ---
 
-Load libararies
+Load libraries
 
-```{r, echo = FALSE}
+```{r library step, message=FALSE}
 library(tidyverse)
 library(moderndive)
 ```
@@ -46,7 +46,7 @@ The dataset "early_january_weather" (renamed weather_df) contains 15 variables (
 
 As requested, the mean temperature was 39.58212 (ªF).
 
-```{r}
+```{r, message=FALSE}
 # scatterplot of `temp` vs. `time` w `humid` as color
 ggplot(weather_df, aes(x = time_hour, y = temp, color = humid)) +
   geom_point() +
@@ -61,11 +61,11 @@ ggplot(weather_df, aes(x = time_hour, y = temp, color = humid)) +
 ggsave('temp_hour_scatter.jpeg')
 ```
 
-The scatterplot of `temp` (ªF) vs. `time_hour` (hours) shows that the temperature rises during the days, peaking in the afternoon and lowering by the evening. The minimum temperatures throughout the days steadily increased throughout the month of January. The relative humidity tends was low during this time period, but increased significantly around Jan 14 when temperatures rose. 
+The scatterplot of `temp` (ªF) vs. `time_hour` (hours) shows that the temperature rises during the days, peaking in the afternoon and lowering by the evening. The minimum temperatures throughout the days steadily increased throughout the month of January. The relative humidity was low during this time period, but increased significantly around Jan 14 when temperatures rose. 
 
 ## Problem 2
 
-```{r}
+```{r problem 2}
 #create a tibble
 q2_df <- tibble(
   num_vec = rnorm(10), #random normal sample 
@@ -82,10 +82,10 @@ print(mean(pull(q2_df, fact_vec)))
 ```
 Taking the means of the numerical vector `num_vec` and the logical vector `above_0` worked, but I was unable to take the mean of the character vector `char_vec` and the factor vector `fact_vec`.
 
-```{r convert to numeric, echo = false}
+```{r coercion, results='hide'}
 #convert to numeric values
 as.numeric(pull(q2_df, above_0)) 
 as.numeric(pull(q2_df, char_vec)) 
 as.numeric(pull(q2_df, fact_vec))
 ```
-The logical vector `above_0` was converted to a binary numeric, and the the factor vector `fact_vec` took on the values the its factor levels, but but I was unable to coerce the character vector `char_vec` into a numerical vector because they were all converted to NAs. This helps explain why the previous means() code failed.
+The logical vector `above_0` was converted to a binary numeric, and the factor vector `fact_vec` took on the values of its factor levels, but I was unable to coerce the character vector `char_vec` into a numerical vector because they were all converted to NAs. This helps explain why the previous means() code failed.
