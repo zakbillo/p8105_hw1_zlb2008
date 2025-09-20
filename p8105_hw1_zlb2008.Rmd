@@ -1,0 +1,27 @@
+---
+title: "P8105 HW1"
+author: "Zakari L. Billo"
+date: "09/20/2025"
+output: html_document
+---
+
+Load libararies
+
+```{r}
+library(tidyverse)
+library(moderndive)
+library(haven)
+```
+
+# Problem 1
+
+```{r import step}
+
+```
+
+# Problem 2
+
+```{r}
+
+```
+
