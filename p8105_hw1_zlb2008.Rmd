@@ -10,13 +10,22 @@ Load libararies
 ```{r}
 library(tidyverse)
 library(moderndive)
-library(haven)
 ```
 
 # Problem 1
 
-```{r import step}
+```{r import step and basic anal}
+data("early_january_weather") 
 
+weather_df <- early_january_weather |>
+  janitor::clean_names() #clean names in new df, preserve original
+  
+summary(weather_df) 
+print(nrow(weather_df)) #358 rows
+print(ncol(weather_df)) #15 col
+
+print(mean(pull(weather_df, temp))) #39.58212
+  
 ```
 
 # Problem 2
